@@ -146,12 +146,12 @@ class InitPageController {
       },
       {
         $sort: {
-          createdAt: -1,
+          campaign_start_time: -1,
         },
       },
-      {
-        $limit: 6,
-      },
+      // {
+      //   $limit: 5,
+      // },
     ]);
 
     Promise.all([getAllCampaignsNew])

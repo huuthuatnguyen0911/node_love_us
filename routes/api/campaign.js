@@ -18,6 +18,11 @@ router.get(
 
 router.get("/donate/:idCampaign", campaignController.getInforDonateCampaign);
 
+router.get(
+  "/get-bank-by-bankcode/:bankCode",
+  campaignController.getBankByBankCode
+);
+
 router.post(
   "/create",
   upload.array("imageCampaign[]"),

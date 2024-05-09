@@ -12,6 +12,8 @@ const groupChatController = require("./GroupChatController");
 const campaignMemberController = require("./CampaignMemberController");
 const campaignDonateController = require("./CampaignDonateController");
 
+const bankModel = require("../models/BankVietNam");
+
 class CampaignController {
   //[POST] /campaign/create
   async create(req, res) {
@@ -639,6 +641,25 @@ class CampaignController {
         return res
           .status(500)
           .json(ResponseModel(false, "Delete campaign failed", err));
+      });
+  }
+
+  // [GET] /campaign/get-bank-by-bankcode/:bankCode
+  getBankByBankCode(req, res) {
+    const bankCode = req.params.bankCode;
+    bankModel
+      .findOne({ bankCode: bankCode })
+      .then((data) => {
+        return res
+          .status(200)
+          .json(
+            ResponseModel(true, "Get bank by bank code successfully", data)
+          );
+      })
+      .catch((err) => {
+        return res
+          .status(500)
+          .json(ResponseModel(false, "Get bank by bank code failed", err));
       });
   }
 }
