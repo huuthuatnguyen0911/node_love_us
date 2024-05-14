@@ -21,6 +21,17 @@ class CampaignController {
     formData.CO_avatar = `images/${req.files[0].filename}`;
     formData.campaign_avatar = `images/${req.files[1].filename}`;
 
+    // let id_donate_block;
+
+    const getId_donate_block = await campaignModel
+      .findOne()
+      .sort({ createdAt: -1 });
+    const id_donate_block = getId_donate_block.Id_donate
+      ? getId_donate_block.Id_donate + 1
+      : 4;
+
+    console.log("id_donate_block", id_donate_block);
+
     // const Donate_max_money = ObjectDonate["Donate_max_money"];
     const formOrganization = {
       CO_name: formData.CO_name,
@@ -66,6 +77,7 @@ class CampaignController {
       Donate_account_number_bank: formData.Donate_account_number_bank,
       Donate_bank_code: formData.Donate_bank_code,
       Donate_bank_name_account: formData.Donate_bank_name_account,
+      Id_donate: id_donate_block,
     };
 
     OrganizationController.createOrganizationWithCampaign(formOrganization)
@@ -661,6 +673,24 @@ class CampaignController {
           .status(500)
           .json(ResponseModel(false, "Get bank by bank code failed", err));
       });
+  }
+
+  // [GET] /campaign/get-all
+  //Lấy ra chiến dịch mới nhất
+  async getNewCampaign(req, res) {
+    try {
+      const campaign = await campaignModel.findOne().sort({ createdAt: -1 });
+
+      if (!campaign) {
+        return res.status(404).send({ message: "No campaign found" });
+      }
+
+      console.log("campaign", campaign);
+
+      res.send(campaign);
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
   }
 }
 

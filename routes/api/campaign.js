@@ -37,6 +37,9 @@ router.post(
   campaignController.joinCampaigns
 );
 
+// test get campaign
+router.get("/get-new-campaign", campaignController.getNewCampaign);
+
 router.delete("/delete/:idCampaign", campaignController.deleteCampaign);
 
 module.exports = router;

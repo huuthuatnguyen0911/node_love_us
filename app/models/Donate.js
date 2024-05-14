@@ -13,6 +13,7 @@ const donateSchema = new Schema(
     Donate_account_number_bank: { type: String },
     Donate_bank_code: { type: String },
     Donate_bank_name_account: { type: String },
+    Id_donate: { type: Number },
   },
   {
     timestamps: true,

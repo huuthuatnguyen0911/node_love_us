@@ -15,7 +15,7 @@ const DonateDonorSherma = new Schema(
         "author_confirm_error",
         "done",
       ],
-      default: "admin_not_confirm",
+      default: "done",
     },
   },
   {
