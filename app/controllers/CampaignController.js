@@ -28,7 +28,7 @@ class CampaignController {
       .sort({ createdAt: -1 });
     const id_donate_block = getId_donate_block.Id_donate
       ? getId_donate_block.Id_donate + 1
-      : 4;
+      : 6;
 
     console.log("id_donate_block", id_donate_block);
 
